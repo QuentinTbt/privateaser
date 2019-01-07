@@ -1,5 +1,31 @@
 'use strict';
 
+
+function prix(time, pricePerHour) {
+    return time * pricePerHour 
+   // return 3;
+}
+
+function prixOk(bars, idbar,time,persons) {
+    for (var i = 0; i < bars.length; i++) {
+        if (bars[i].id == idbar) {
+            return bars[i].pricePerHour * time + bars[i].pricePerPerson * persons;
+        }
+    }
+    return 0;
+}
+
+function Maj() {
+    for (var i = 0; i < events.length; i++) {
+        for (var j = 0; j < bars.length; j++) {
+            if (events[i].barId == bars[j].id) {
+                events[i].price = events[i].time * bars[j].pricePerHour + events[i].persons * bars[j].pricePerPerson;
+            }
+        }
+    }
+    
+}
+
 //list of bats
 //useful for ALL 5 steps
 //could be an array of objects that you fetched from api or database
@@ -146,6 +172,7 @@ const actors = [{
   }]
 }];
 
+(Maj());
 console.log(bars);
 console.log(events);
 console.log(actors);
