@@ -1,25 +1,43 @@
 'use strict';
 
 
-function prix(time, pricePerHour) {
-    return time * pricePerHour 
-   // return 3;
-}
 
-function prixOk(bars, idbar,time,persons) {
-    for (var i = 0; i < bars.length; i++) {
-        if (bars[i].id == idbar) {
-            return bars[i].pricePerHour * time + bars[i].pricePerPerson * persons;
-        }
-    }
-    return 0;
-}
 
 function Maj() {
     for (var i = 0; i < events.length; i++) {
         for (var j = 0; j < bars.length; j++) {
             if (events[i].barId == bars[j].id) {
-                events[i].price = events[i].time * bars[j].pricePerHour + events[i].persons * bars[j].pricePerPerson;
+
+                var time = events[i].time;
+                var pricePerHour = bars[j].pricePerHour;
+                var persons = events[i].persons;
+                var pricePerPerson = bars[j].pricePerPerson;
+                var price = time * pricePerHour + persons * pricePerPerson;
+
+                if (persons <= 10) {
+
+                    events[i].price = price ;
+
+                }
+
+                if (persons > 10 && persons <= 20 ) {
+
+                    events[i].price = price * 0.9 ;
+
+                }
+
+                if (persons > 20 && persons <= 60 ) {
+
+                    events[i].price = price * 0.7;
+
+                }
+
+                if (persons > 60) {
+
+                    events[i].price = price * 0.5;
+
+                }
+
             }
         }
     }
