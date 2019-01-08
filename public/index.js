@@ -1,6 +1,25 @@
 'use strict';
 
 
+function Commission() {
+    for (var i = 0; i < events.length; i++) {
+        for (var j = 0; j < bars.length; j++) {
+            if (events[i].barId == bars[j].id) {
+
+                var price = events[i].price;
+                var commission = price * 0.3;
+                var insurance = commission / 2;
+                var treasury = events[i].persons;
+                var privateaser = commission - (insurance + treasury);
+
+                events[i].commission.insurance = insurance;
+                events[i].commission.treasury = treasury;
+                events[i].commission.privateaser = privateaser;
+
+            }
+        }
+    }
+}
 
 
 function Maj() {
@@ -19,30 +38,31 @@ function Maj() {
                     events[i].price = price ;
 
                 }
-
                 if (persons > 10 && persons <= 20 ) {
 
                     events[i].price = price * 0.9 ;
 
                 }
-
                 if (persons > 20 && persons <= 60 ) {
 
                     events[i].price = price * 0.7;
 
                 }
-
                 if (persons > 60) {
 
                     events[i].price = price * 0.5;
 
                 }
 
+                Commission();
+
             }
         }
     }
     
 }
+
+
 
 //list of bats
 //useful for ALL 5 steps
