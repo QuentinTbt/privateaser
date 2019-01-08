@@ -6,16 +6,23 @@ function Commission() {
         for (var j = 0; j < bars.length; j++) {
             if (events[i].barId == bars[j].id) {
 
-                var price = events[i].price;
+                
+                var price = events[i].price
+                if (events[i].options.deductibleReduction == true) {
+                    price = price - events[i].persons;
+                }
                 var commission = price * 0.3;
                 var insurance = commission / 2;
                 var treasury = events[i].persons;
                 var privateaser = commission - (insurance + treasury);
+                if (events[i].options.deductibleReduction == true) {
+                    privateaser = privateaser + events[i].persons;
+                }
 
                 events[i].commission.insurance = insurance;
                 events[i].commission.treasury = treasury;
                 events[i].commission.privateaser = privateaser;
-
+                
             }
         }
     }
@@ -33,24 +40,48 @@ function Maj() {
                 var pricePerPerson = bars[j].pricePerPerson;
                 var price = time * pricePerHour + persons * pricePerPerson;
 
+                
+
                 if (persons <= 10) {
 
-                    events[i].price = price ;
+                    if (events[i].options.deductibleReduction == true) {
+                        events[i].price = price + persons;
+                    }
+                    else {
+                        events[i].price = price;
+                    }
+                    
+
 
                 }
                 if (persons > 10 && persons <= 20 ) {
 
-                    events[i].price = price * 0.9 ;
+                    if (events[i].options.deductibleReduction == true) {
+                        events[i].price = price*0.9 + persons;
+                    }
+                    else {
+                        events[i].price = price*0.9;
+                    }
 
                 }
                 if (persons > 20 && persons <= 60 ) {
 
-                    events[i].price = price * 0.7;
+                    if (events[i].options.deductibleReduction == true) {
+                        events[i].price = price * 0.7 + persons;
+                    }
+                    else {
+                        events[i].price = price * 0.7;
+                    }
 
                 }
                 if (persons > 60) {
 
-                    events[i].price = price * 0.5;
+                    if (events[i].options.deductibleReduction == true) {
+                        events[i].price = price * 0.5 + persons;
+                    }
+                    else {
+                        events[i].price = price * 0.5;
+                    }
 
                 }
 
